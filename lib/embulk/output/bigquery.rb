@@ -31,6 +31,9 @@ module Embulk
       end
 
       def self.configure(config, schema, task_count)
+        ENV.each do |key, value|
+          Embulk.logger.info { "#{key}: #{value}" }
+        end
         task = {
           'mode'                           => config.param('mode',                           :string,  :default => 'append'),
           'auth_method'                    => config.param('auth_method',                    :string,  :default => 'application_default'),
